@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container # Nome do container, é opcional
+    ports:
+      - "3306:3306" # Mapeamento da porta 3306 do host para a porta 3306 do container, caso a porta do host já estiver em uso basta alterar para uma porta disponível
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: moedafy
+      MYSQL_USER: user # usuario opcional, não passando é usado um padrão
+      MYSQL_PASSWORD: userpassword # senha opcional
+    volumes:
+      - mysql_data:/var/lib/mysql # Local de persistência, se necessário alterar para um local de fácil gerenciamentol
+
+volumes:
+  mysql_data:
