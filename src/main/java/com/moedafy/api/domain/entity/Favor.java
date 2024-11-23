@@ -1,10 +1,12 @@
 package com.moedafy.api.domain.entity;
 
+import com.moedafy.api.infra.enums.StatusFavor;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,6 +30,7 @@ public class Favor {
     @Column(length = 255)
     private String description;
 
+    @Column(nullable = false)
     private Integer valor;
 
     //Hibernate cria uma tabela intermediaria com o id usuario e favor para gerenciar o mapeamento many to many
@@ -38,4 +41,10 @@ public class Favor {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> collaborators;
+
+    @OneToMany(mappedBy = "favor", cascade = CascadeType.ALL)
+    private List<Transaction> transactions;
+
+    @Enumerated(EnumType.STRING)
+    private StatusFavor status = StatusFavor.ABERTO;
 }

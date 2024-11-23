@@ -18,11 +18,15 @@ public class Transaction {
     private String id;
 
     @ManyToOne
+    @JoinColumn(name = "id_favor", referencedColumnName = "id")
+    private Favor favor;
+
+    @ManyToOne
     @JoinColumn(name = "id_wallet_origin", referencedColumnName = "id")
     private Wallet walletOrigin;
 
     @ManyToOne
-    @JoinColumn(name = "id_wallet_destinate", referencedColumnName = "id")
+    @JoinColumn(name = "id_wallet_destinate", referencedColumnName = "id", nullable = true)
     private Wallet walletDestinate;
 
     private LocalDateTime createdAt;

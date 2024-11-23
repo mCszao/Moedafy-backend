@@ -19,7 +19,8 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    private Integer balance;
+    @Column(nullable = false)
+    private Integer balance = 0;
 
     // Transações onde a conta é a origem
     @OneToMany(mappedBy = "walletOrigin", cascade = CascadeType.ALL)
